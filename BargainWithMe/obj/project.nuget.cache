@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "gq0t6wqlAGrFzQxCt4rAWM7US/l3Nvhr22jg4hUEiXgpNabhj04QozWmdEDFKvi/mtN8/bxMHXf7JvgMiAmhUQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mrter\\source\\repos\\BargainWithMe\\BargainWithMe\\BargainWithMe.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mrter\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.14\\microsoft.aspnetcore.openapi.7.0.14.nupkg.sha512",
+    "C:\\Users\\mrter\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\mrter\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\mrter\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\mrter\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\mrter\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\mrter\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
