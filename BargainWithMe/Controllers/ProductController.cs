@@ -1,5 +1,6 @@
 ﻿using BargainWithMe.Core.Contracts.RepositoryContracts;
 using BargainWithMe.Core.DTO;
+using BargainWithMe.Core.Entities;
 using BargainWithMe.Core.Exceptions;
 using BargainWithMe.Core.Mapper;
 using BargainWithMe.Infrastructure.Repositories;
@@ -29,8 +30,8 @@ public class ProductController : ControllerBase
     {
         try
         {
-            var products = await _repository.Product.GetAllAsync();
-            return Ok(products);
+            var products = await _repository.Product.GetAllProdutcsAsync();
+            return Ok(products.Select(x => _mapper.MapProductToProductDTO(x)));
         }
         catch (Exception)
         {
@@ -56,19 +57,11 @@ public class ProductController : ControllerBase
         }
     }
 
-    //[HttpGet]
-    //[ProducesResponseType(StatusCodes.Status200OK)]
-    //[ProducesResponseType(StatusCodes.Status404NotFound)]
-    //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    //public async Task<IActionResult> GetProductsByCatalog()
-    //{
-    //}
-
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public IActionResult CreateProduct([FromBody] ProductDTO product)
+    public async Task<IActionResult> CreateProduct([FromBody] ProductDTO product)
     {
         try
         {
@@ -83,9 +76,9 @@ public class ProductController : ControllerBase
             }
 
             _repository.Product.CreateProduct(_mapper.MapProductDtoToProduct(product));
-            _repository.Save();
+            await _repository.Save();
 
-            return CreatedAtRoute("ProductById", new { id = product.Id }, product);
+            return CreatedAtRoute("GetProductByGuid", new { id = product.Id }, product);
         }
         catch (Exception)
         {
@@ -117,7 +110,7 @@ public class ProductController : ControllerBase
                 return NotFound("Product doesn't exist");
             }
 
-            _repository.Product.UpdateProduct(productEntity);
+            _repository.Product.UpdateProduct(_mapper.MapProductDtoToProduct(product));
             await _repository.Save();
 
             return NoContent();

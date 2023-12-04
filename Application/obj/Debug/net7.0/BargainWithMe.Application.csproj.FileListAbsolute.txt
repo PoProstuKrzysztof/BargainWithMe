@@ -1,0 +1,14 @@
+C:\Users\mrter\source\repos\BargainWithMe\Application\bin\Debug\net7.0\BargainWithMe.Application.deps.json
+C:\Users\mrter\source\repos\BargainWithMe\Application\bin\Debug\net7.0\BargainWithMe.Application.runtimeconfig.json
+C:\Users\mrter\source\repos\BargainWithMe\Application\bin\Debug\net7.0\BargainWithMe.Application.dll
+C:\Users\mrter\source\repos\BargainWithMe\Application\bin\Debug\net7.0\BargainWithMe.Application.pdb
+C:\Users\mrter\source\repos\BargainWithMe\Application\obj\Debug\net7.0\BargainWithMe.Application.csproj.AssemblyReference.cache
+C:\Users\mrter\source\repos\BargainWithMe\Application\obj\Debug\net7.0\BargainWithMe.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mrter\source\repos\BargainWithMe\Application\obj\Debug\net7.0\BargainWithMe.Application.AssemblyInfoInputs.cache
+C:\Users\mrter\source\repos\BargainWithMe\Application\obj\Debug\net7.0\BargainWithMe.Application.AssemblyInfo.cs
+C:\Users\mrter\source\repos\BargainWithMe\Application\obj\Debug\net7.0\BargainWithMe.Application.csproj.CoreCompileInputs.cache
+C:\Users\mrter\source\repos\BargainWithMe\Application\obj\Debug\net7.0\BargainWithMe.Application.dll
+C:\Users\mrter\source\repos\BargainWithMe\Application\obj\Debug\net7.0\refint\BargainWithMe.Application.dll
+C:\Users\mrter\source\repos\BargainWithMe\Application\obj\Debug\net7.0\BargainWithMe.Application.pdb
+C:\Users\mrter\source\repos\BargainWithMe\Application\obj\Debug\net7.0\BargainWithMe.Application.genruntimeconfig.cache
+C:\Users\mrter\source\repos\BargainWithMe\Application\obj\Debug\net7.0\ref\BargainWithMe.Application.dll

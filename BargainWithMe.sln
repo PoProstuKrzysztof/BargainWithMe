@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34302.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BargainWithMe", "BargainWithMe\BargainWithMe.csproj", "{EEBEB76A-B1B6-4C93-9452-1B1B88185F73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BargainWithMe", "BargainWithMe\BargainWithMe.csproj", "{EEBEB76A-B1B6-4C93-9452-1B1B88185F73}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8BA9717E-A1A2-4802-9EF0-F6433318474E} = {8BA9717E-A1A2-4802-9EF0-F6433318474E}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7220B9C8-CFF5-4CB2-A296-7EAA26838886}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BargainWithMe.Core", "Domain\BargainWithMe.Core.csproj", "{CAC4FA71-9706-4024-8C80-FA96095C6490}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BargainWithMe.Infrastructure", "Infrastructure\BargainWithMe.Infrastructure.csproj", "{8BA9717E-A1A2-4802-9EF0-F6433318474E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CAC4FA71-9706-4024-8C80-FA96095C6490} = {CAC4FA71-9706-4024-8C80-FA96095C6490}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +27,21 @@ Global
 		{EEBEB76A-B1B6-4C93-9452-1B1B88185F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEBEB76A-B1B6-4C93-9452-1B1B88185F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEBEB76A-B1B6-4C93-9452-1B1B88185F73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAC4FA71-9706-4024-8C80-FA96095C6490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAC4FA71-9706-4024-8C80-FA96095C6490}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAC4FA71-9706-4024-8C80-FA96095C6490}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAC4FA71-9706-4024-8C80-FA96095C6490}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BA9717E-A1A2-4802-9EF0-F6433318474E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BA9717E-A1A2-4802-9EF0-F6433318474E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BA9717E-A1A2-4802-9EF0-F6433318474E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BA9717E-A1A2-4802-9EF0-F6433318474E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CAC4FA71-9706-4024-8C80-FA96095C6490} = {7220B9C8-CFF5-4CB2-A296-7EAA26838886}
+		{8BA9717E-A1A2-4802-9EF0-F6433318474E} = {7220B9C8-CFF5-4CB2-A296-7EAA26838886}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BBB1B503-3876-4159-BB2C-209C0497F7B3}

@@ -9,10 +9,11 @@ namespace BargainWithMe.Controllers;
 
 [Route("/catalog")]
 [ApiController]
-public class CatalogController : ControllerBase
+[ApiConventionType(typeof(DefaultApiConventions))]
+public class CatalogController : Controller
 {
-    private IRepositoryWrapper _repository;
-    private Mapper _mapper = new Mapper();
+    private readonly IRepositoryWrapper _repository;
+    private readonly Mapper _mapper = new Mapper();
 
     public CatalogController(IRepositoryWrapper repository)
     {
@@ -27,8 +28,8 @@ public class CatalogController : ControllerBase
     {
         try
         {
-            var catalogs = await _repository.Catalog.GetAll();
-            return Ok(catalogs);
+            var catalogs = await _repository.Catalog.GetAllCatalogsAsync();
+            return Ok(catalogs.Select(x => _mapper.MapCatalogToCatalogDTO(x)));
         }
         catch (Exception)
         {
@@ -44,7 +45,7 @@ public class CatalogController : ControllerBase
     {
         try
         {
-            var catalog = await _repository.Catalog.GetByGuid(id);
+            var catalog = await _repository.Catalog.GetProductByGuidAsync(id);
 
             return catalog == null ? NotFound() : Ok(_mapper.MapCatalogToCatalogDTO(catalog));
         }
@@ -58,7 +59,7 @@ public class CatalogController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public IActionResult CreateCatalog([FromBody] CatalogDTO catalog)
+    public async Task<IActionResult> CreateCatalogAsync([FromBody] CatalogDTO catalog)
     {
         try
         {
@@ -73,9 +74,9 @@ public class CatalogController : ControllerBase
             }
 
             _repository.Catalog.CreateCatalog(_mapper.MapCatalogDtoToCatalog(catalog));
-            _repository.Save();
+            await _repository.Save();
 
-            return CreatedAtRoute("CatalogById", new { id = catalog.Id }, catalog);
+            return CreatedAtRoute("GetCatalogById", new { Id = catalog.Id }, catalog);
         }
         catch (Exception)
         {
@@ -101,13 +102,13 @@ public class CatalogController : ControllerBase
                 return BadRequest("Invalid model object");
             }
 
-            var catalogEntity = await _repository.Catalog.GetByGuid(catalog.Id);
+            var catalogEntity = await _repository.Catalog.GetProductByGuidAsync(catalog.Id);
             if (catalogEntity is null)
             {
                 return NotFound("Catalog doesn't exist");
             }
 
-            _repository.Catalog.UpdateCatalog(catalogEntity);
+            _repository.Catalog.UpdateCatalog(_mapper.MapCatalogDtoToCatalog(catalog));
             await _repository.Save();
 
             return NoContent();
@@ -126,7 +127,7 @@ public class CatalogController : ControllerBase
     {
         try
         {
-            var catalog = await _repository.Catalog.GetByGuid(id);
+            var catalog = await _repository.Catalog.GetProductByGuidAsync(id);
             if (catalog is null)
             {
                 return NotFound("Catalog doesn't exist");
@@ -140,6 +141,74 @@ public class CatalogController : ControllerBase
         catch (Exception)
         {
             return StatusCode(500, "Internal server error");
+        }
+    }
+
+    [HttpGet("/AllCatalogsWithProdutcs")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetAllCatalogsWithProducts()
+    {
+        try
+        {
+            // We're obtaining catalogs and products in them.
+            var catalogs = await _repository.Catalog.GetAllCatalogsAsync();
+            var catalogsWithProducts = new List<CatalogWithProductsDTO>();
+
+            foreach (var catalog in catalogs)
+            {
+                var productsInCatalog = await _repository.Product.GetAllProductsByCatalogAsync(catalog.Id);
+                var productsInCatalogDTO = productsInCatalog.Select(product => _mapper.MapProductToProductDTO(product)).ToList();
+
+                catalogsWithProducts.Add(new CatalogWithProductsDTO
+                {
+                    Catalog = _mapper.MapCatalogToCatalogDTO(catalog),
+                    Products = productsInCatalogDTO
+                });
+            }
+
+            return Ok(catalogsWithProducts);
+        }
+        catch (Exception)
+        {
+            throw new NoRecordsException("There are no records in the database.");
+        }
+    }
+
+    [HttpGet("/CatalogWithProdutcs/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetCatalogWithProdutcs(Guid id)
+    {
+        try
+        {
+            // We're obtaining catalog and products in it.
+            var specificCatalog = await _repository.Catalog.GetProductByGuidAsync(id);
+            var catalogWithProducts = new List<CatalogWithProductsDTO>();
+
+            specificCatalog.Products = await _repository.Product.GetAllProductsByCatalogAsync(id);
+
+            foreach (var catalog in specificCatalog.Products)
+            {
+                // We look for products in catalog and map it to DTO
+                var productsInCatalogDTO = specificCatalog.Products
+                    .Select(product => _mapper.MapProductToProductDTO(product))
+                    .ToList();
+
+                catalogWithProducts.Add(new CatalogWithProductsDTO
+                {
+                    Catalog = _mapper.MapCatalogToCatalogDTO(specificCatalog),
+                    Products = productsInCatalogDTO
+                });
+            }
+
+            return Ok(catalogWithProducts);
+        }
+        catch (Exception)
+        {
+            throw new NoRecordsException("There are no records in the database.");
         }
     }
 }
