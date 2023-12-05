@@ -6,6 +6,8 @@ Jako, że głównie skupiłem się na backendzie, nie tworzyłem UI do tego proj
 
 Poniżej przedstawiam instrukcje jak przejść przez API z gotowymi encjami do wklejenia do requestów (oczywiście można wpisać swoje, ale dla wygody wolałem je umieścić tutaj :] )
 
+Przed rozpoczęciem trzeba zrobić migracje bazy, w terminalu wpisać "Update-database"
+
 
 1. W CATALOG w POST tworzymy katalog
 
