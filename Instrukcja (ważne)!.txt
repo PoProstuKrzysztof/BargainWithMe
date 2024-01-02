@@ -37,9 +37,7 @@ Przed rozpoczęciem trzeba zrobić migracje bazy, w terminalu wpisać "Update-da
 Wchodzimy do requesta POST w sekcji NEGOTIATION i przeklejamy id naszego produktu i dajemy proponowaną cene. Domyślnie szansa na udanie się negocjacji jest ustawiona na 50%.
 
 
-7.Jeśli negocjacja się udała, to dla weryfikacji wchodzimy do GET w PRODUCT po konkretnym id /product/{id}. Jeśli nie to próbuj dalej! :D
+7.Jeśli negocjacja się udała, to dla weryfikacji wchodzimy do GET w PRODUCT po konkretnym id /product/{id}
 
 
-
-Jeśli moja rekrutacja nie przebiegnie pomyślnie, prosiłbym o krótkie podsumowanie co mogłem zrobić lepiej, czego nie robić, jakich bibliotek lepiej używać czy ogólnie podejścia do struktury programu, z góry dziękuje :) 
 
